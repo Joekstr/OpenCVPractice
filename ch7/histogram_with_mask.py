@@ -23,5 +23,14 @@ args = vars(ap.parse_args())
 image = cv2.imread(args['image'])
 cv2.imshow('DREAM', image)
 plot_histogram(image, "Histogram for DREAM")
+
+mask = np.zeros(image.shape[:2], dtype = "uint8")
+cv2.rectangle(mask,(92,95),(315,325),255,-1)
+cv2.imshow("THAT'S WHAT THE POINT OF THE MASK IS", mask)
+
+masked = cv2.bitwise_and(image,image,mask = mask)
+cv2.imshow("no one cared who i was until i put on the mask", masked)
+
+plot_histogram(image, "Histogram for Masked Image", mask = mask)
 plt.show()
 cv2.waitKey(0)
